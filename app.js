@@ -6,7 +6,19 @@ var express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser');
 
-var db = mongoose.connect('mongodb://localhost/books');
+//var db = mongoose.connect('mongodb://localhost/books');
+
+mongoose.connect('mongodb://foonation:food4word@ds033116.mlab.com:33116/foonation', function(error){
+    if(error){
+        console.log(error);
+    }
+});
+
+
+
+// Mongoose Model definition
+// var User = mongoose.model('users', UserSchema);
+
 
 var Book = require('./models/bookModel');
 
@@ -18,8 +30,7 @@ var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-bookRouter = require('./Routes/bookRoutes.js')(Book);
-
+bookRouter = require('./routes/bookRoutes.js')(Book);
 
 bookRouter.route('/Books/:bookId');
 
@@ -27,8 +38,6 @@ bookRouter.route('/Books/:bookId');
 app.use('/api/books', bookRouter);
 
 // app.use('/api/author', authorRouter);
-
-
 
 app.get('/', function(req, res){
    res.send('Welcome to my API!!');

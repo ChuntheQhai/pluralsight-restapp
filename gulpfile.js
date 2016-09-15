@@ -10,7 +10,7 @@ gulp.task('default', function(){
        script: 'app.js',
        ext: 'js',
        env: {
-           PORT: 8000
+           PORT: 8888
        },
        ignore: ['./node_modules/**']
    })
@@ -18,3 +18,4 @@ gulp.task('default', function(){
         console.log('RestartLog');
     });
 });
+
